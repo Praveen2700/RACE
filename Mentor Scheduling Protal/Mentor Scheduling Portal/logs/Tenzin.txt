@@ -1,3 +1,0 @@
-Login successful at: 2024-04-09 11:13:26.775372
-Logout successful at: 2024-04-09 12:54:03.913843
-Login successful at: 2024-04-10 10:13:48.917874
