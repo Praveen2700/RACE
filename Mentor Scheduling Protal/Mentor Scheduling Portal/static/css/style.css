@@ -1,0 +1,2647 @@
+@font-face {
+    font-family: 'Poppins';
+    src: url('./Poppins/Poppins-Medium.ttf') format('truetype');
+}
+
+body {
+    margin: 0;
+    overflow-x: hidden;
+    background-color: whitesmoke;
+    font-family: 'Poppins';
+}
+
+#content {
+    display: none;
+}
+
+#preloader-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    /* Adjust the opacity and color of the overlay */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+#preloader img {
+    width: 100px;
+    /* Adjust the size of the preloader image */
+    animation: spin 1s linear infinite;
+    /* Y-axis spin animation */
+}
+
+body.loading #preloader {
+    display: none;
+}
+
+@keyframes spin {
+    from {
+        transform: rotateY(0deg);
+    }
+
+    to {
+        transform: rotateY(360deg);
+    }
+}
+
+.logo_bottom {
+    max-width: 380px;
+    /* Adjust the width as needed */
+    max-height: 380px;
+    /* Adjust the height as needed */
+    margin-right: 10px;
+    /* Optional margin for spacing */
+    position: absolute;
+    bottom: 0px;
+    /* Adjust the top position as needed */
+    right: 0px;
+    /* Adjust the left position as needed */
+}
+
+/*title*/
+.btn {
+    position: relative;
+    cursor: pointer;
+    border: none;
+    background: none;
+}
+
+.tooltip {
+    visibility: hidden;
+    position: absolute;
+    bottom: calc(100% + 8px);
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #e0e5ec;
+    color: #333;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 10px;
+    font-size: 14px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.tooltip:before {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 5px;
+    border-style: solid;
+    border-color: #e0e5ec transparent transparent transparent;
+}
+
+.btn:hover .tooltip {
+    visibility: visible;
+    opacity: 1;
+}
+
+#navbar {
+    background-color: rgb(24, 186, 240);
+    /* Slightly darker orange */
+    padding: 5px;
+    /* Increase padding-left to 20px (adjust as needed) */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.5s ease;
+    /* Smooth background color transition */
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+}
+
+.logo-img {
+    max-height: 35px;
+    margin-right: 15px;
+    /* Adjust the margin as needed */
+}
+
+.logo-container .logo-img:last-child {
+    max-height: 55px;
+    /* Adjust the maximum height for the second logo */
+}
+
+#navbar:hover {
+    background-color: rgb(24, 186, 240);
+    /* Darker orange on hover */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    /* Increased box-shadow on hover */
+}
+
+#navbar a {
+    color: #fff;
+    text-decoration: none;
+    transition: color 0.3s ease;
+    /* Smooth text color transition */
+}
+
+#navbar a:hover {
+    color: rgb(24, 186, 240);
+    /* Yellowish color on hover */
+}
+
+/* Dropdown styling */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    top: 90%;
+    /* Adjusted to open below the navigation bar */
+    margin-top: 5px;
+    background-color: rgb(24, 186, 240);
+    z-index: 1;
+    min-width: 160px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    animation: fadeIn 0.3s ease-in-out;
+    overflow: hidden;
+}
+
+.dropdown-content:before {
+    position: absolute;
+    right: 10px;
+    border-width: 0 8px 8px 8px;
+    border-style: solid;
+    border-color: rgb(24, 186, 240);
+}
+
+.dropdown-content a {
+    color: white;
+    padding: 12px 16px;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: #eee8e8;
+}
+
+.dropdown.open .dropdown-content {
+    display: block;
+}
+
+/* Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+/* Hover effect for the dropdown */
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/*menu*/
+#menu {
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: auto;
+    height: 100%;
+    background-color: #e0e5ec;
+    padding-top: 85px;
+    padding-left: 5px;
+    padding-right: 5px;
+    transition: width 0.5s ease;
+    /* Changed transition property */
+    border-right: 2px solid #cfd8dc;
+    /*box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);*/
+    overflow: hidden;
+}
+
+#menu-icons {
+    display: flex;
+    flex-direction: column;
+}
+
+#menu-icons a {
+    padding: 20px;
+    text-decoration: none;
+    font-size: 15px;
+    color: #2c3e50;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    transition: background-color 0.3s, transform 0.3s;
+    /* Changed transition property */
+}
+
+.menu-text {
+    display: none;
+    margin-left: 10px;
+}
+
+#menu:hover .menu-text {
+    display: block;
+}
+
+#menu-icons a:hover {
+    transform: scale(1.08);
+}
+
+#menu-icons a:hover::before {
+    content: "";
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    right: 4px;
+    bottom: 4px;
+    background-color: #e0e5ec;
+    /*box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);*/
+    z-index: -1;
+    transform: scale(1.08);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+#scheduleTable1 {
+    display: none;
+}
+
+/*logo containter*/
+#logo-container {
+    text-align: center;
+    display: flex;
+    align-items: center;
+    min-height: 65vh;
+}
+
+#logo {
+    max-width: 250px;
+    height: auto;
+    margin: 0 auto;
+    transition: transform 0.5s ease, filter 0.5s ease;
+    /* Added filter for hover effect */
+}
+
+#logo:hover {
+    transform: scale(1.1);
+    filter: brightness(1.2);
+    /* Slight brightness increase on hover */
+}
+
+#logo {
+    margin-top: 200px;
+    padding: 20px;
+    opacity: 0;
+    animation: fadeIn 1s forwards;
+}
+
+/* Base styles for dashboard container */
+.dashboard-container {
+    position: fixed;
+    top: 50px;
+    left: 7%;
+    width: 90%;
+    height: auto;
+    padding: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    transition: width 0.3s, opacity 0.5s;
+    /* Add transition for smooth resizing and opacity change */
+    z-index: 1;
+    /* Ensure dashboard appears above sidebar */
+    opacity: 0;
+    /* Initially set opacity to 0 */
+    animation: popIn 1s ease forwards;
+    /* Apply pop-in animation with a slower duration */
+}
+
+@keyframes popIn {
+    0% {
+        opacity: 0;
+        /* Start with opacity 0 */
+        transform: scale(0.5);
+        /* Start with smaller size */
+    }
+
+    100% {
+        opacity: 1;
+        /* End with opacity 1 */
+        transform: scale(1);
+        /* End with original size */
+    }
+}
+
+.dashboard-item {
+    background-color: #e0e5ec;
+    /* Light background color */
+    border-radius: 8px;
+    margin-top: 25px;
+    width: calc(25% - 20px);
+    /* Adjusted width for 4 items in a row */
+    /* Adjusted width */
+    padding: 20px;
+    text-align: center;
+    box-sizing: border-box;
+    /* Include padding in width calculation */
+    margin-bottom: 50px;
+    /* Increase space between items */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    /* Add subtle shadow */
+    transition: transform 0.3s, box-shadow 0.3s;
+    /* Smooth transition for transform and box-shadow */
+}
+
+.dashboard-item:hover {
+    transform: translateY(-5px);
+    /* Move item up on hover */
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+    /* Increase shadow on hover */
+}
+
+.dashboard-item:nth-child(4n) {
+    margin-right: 0;
+    /* Remove margin on the last item in each row */
+}
+
+.dashboard-item h2 {
+    font-size: 24px;
+    line-height: 1.3;
+    margin: 0;
+    margin-bottom: 10px;
+    color: #343a40;
+    /* Dark text color */
+}
+
+.dashboard-item p {
+    color: #6c757d;
+    /* Slightly darker text color */
+    font-size: 16px;
+    margin: 0;
+}
+
+.more-info {
+    background-color: rgb(24, 186, 240);
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    padding: 10px 20px;
+    text-decoration: none;
+    margin-top: 15px;
+    /* Increase margin */
+    display: inline-block;
+    /* Display as inline-block */
+    transition: background-color 0.3s;
+    /* Smooth transition */
+}
+
+.more-info:hover {
+    background-color: rgb(24, 186, 240);
+    /* Darker color on hover */
+}
+
+.progress-ring {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    margin: 0 auto;
+    /* Center horizontally */
+    background: linear-gradient(145deg, #e0e5ec, #ffffff);
+    /* Add gradient for 3D effect */
+    border-radius: 50%;
+    /* Make it round */
+    box-shadow: 10px 10px 20px #a7afb8, -10px -10px 20px #ffffff, inset 5px 5px 10px #c2c7cc, inset -5px -5px 10px #ffffff;
+    /* Soft box shadow with inset shadow for depth */
+}
+
+.progress-ring-circle {
+    fill: none;
+}
+
+.progress-ring-circle-bg {
+    stroke: #e0e5ec;
+    stroke-width: 8;
+}
+
+.progress-ring-circle-fill {
+    stroke: rgb(24, 186, 240);
+    stroke-width: 8;
+    stroke-dasharray: 339.292;
+    stroke-dashoffset: 0;
+    transition: stroke-dashoffset 0.3s;
+}
+
+.progress-info {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.progress-info h2 {
+    font-size: 25px;
+    margin: 0;
+    color: #343a40;
+}
+
+.progress-info p {
+    font-size: 13px;
+    margin: 0;
+    color: #6c757d;
+}
+
+#noResultsMessage {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.dashboard-item.special .progress-ring-circle-fill,
+.dashboard-item.special .more-info {
+    background-color: #ff0000;
+    /* Red color */
+}
+
+.dashboard-item.special .progress-ring-circle-fill {
+    stroke: #ff0000;
+    /* Red color */
+    animation: blink 1s infinite alternate;
+    /* Add blink effect */
+}
+
+.dashboard-item.special .more-info {
+    animation: blink 1s infinite alternate;
+    /* Add blink effect */
+}
+
+.dashboard-item.special .more-info:hover {
+    animation: infinite;
+    /* Disable animation on hover */
+}
+
+
+.dashboard-item.special .more-info:hover {
+    animation: none;
+}
+
+@keyframes blink {
+    0% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0.5;
+    }
+}
+
+/* Base styles for dashboard container for userview*/
+.dashboard-containers {
+    position: fixed;
+    top: 60px;
+    left: 4%;
+    width: 90%;
+    height: auto;
+    padding: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    transition: width 0.3s, opacity 0.5s;
+    /* Add transition for smooth resizing and opacity change */
+    z-index: 1;
+    /* Ensure dashboard appears above sidebar */
+    opacity: 0;
+    /* Initially set opacity to 0 */
+    animation: popIn 1s ease forwards;
+    /* Apply pop-in animation with a slower duration */
+}
+
+@keyframes popIn {
+    0% {
+        opacity: 0;
+        /* Start with opacity 0 */
+        transform: scale(0.5);
+        /* Start with smaller size */
+    }
+
+    100% {
+        opacity: 1;
+        /* End with opacity 1 */
+        transform: scale(1);
+        /* End with original size */
+    }
+}
+
+.dashboard-items {
+    background-color: #e0e5ec;
+    /* Light background color */
+    border-radius: 8px;
+    margin-top: 25px;
+    width: calc(25% - 20px);
+    /* Adjusted width for 4 items in a row */
+    /* Adjusted width */
+    padding: 20px;
+    text-align: center;
+    box-sizing: border-box;
+    /* Include padding in width calculation */
+    margin-bottom: 50px;
+    /* Increase space between items */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    /* Add subtle shadow */
+    transition: transform 0.3s, box-shadow 0.3s;
+    /* Smooth transition for transform and box-shadow */
+}
+
+.dashboard-items:hover {
+    transform: translateY(-5px);
+    /* Move item up on hover */
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+    /* Increase shadow on hover */
+}
+
+.dashboard-items:nth-child(4n) {
+    margin-right: 0;
+    /* Remove margin on the last item in each row */
+}
+
+.dashboard-items h2 {
+    font-size: 24px;
+    line-height: 1.3;
+    margin: 0;
+    margin-bottom: 10px;
+    color: #343a40;
+    /* Dark text color */
+}
+
+.dashboard-items select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    box-sizing: border-box;
+    /* Include padding in width calculation */
+}
+
+.dashboard-items select {
+    appearance: none;
+    /* Remove default appearance for select */
+    background-image: url('data:image/svg+xml;utf8,<svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path fill="%23343a40" fill-rule="evenodd" clip-rule="evenodd" d="M2.5 6.5l7.5 7.5 7.5-7.5z" /></svg>');
+    /* Custom arrow icon for select */
+    background-repeat: no-repeat;
+    background-position: right 10px top 50%;
+    background-size: 14px;
+    /* Position and size of arrow icon */
+    cursor: pointer;
+}
+
+/* Apply Flatpickr styles to the date inputs */
+.dashboard-items input[type="text"] {
+    padding: 9px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.dashboard-containers-button {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-right: 10px;
+    /* Adjust margin to position the button */
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+/* Shared styles for sidebars */
+.sidebar {
+    position: fixed;
+    top: 0;
+    right: -300px;
+    /* Initially hidden */
+    width: 300px;
+    text-align: center;
+    height: 100%;
+    background-color: #e0e5ec;
+    padding-top: 50px;
+    transition: all 0.3s ease;
+    z-index: 2;
+    /* Ensure sidebar appears above dashboard */
+    overflow-y: auto;
+    /* Add scrollbar */
+    scrollbar-width: thin;
+    /* Thin scrollbar */
+    scrollbar-color: #ccc transparent;
+    /* Scrollbar color */
+}
+
+/* Styles for the sidebar content */
+.sidebar-content {
+    padding: 20px;
+    color: #333;
+}
+
+/* Show class for all sidebars */
+.sidebar.show {
+    right: 0;
+    /* Visible when toggled */
+}
+
+/* Shared styles for active module sidebar */
+.active-sidebar {
+    position: fixed;
+    top: 0;
+    right: -300px;
+    /* Initially hidden */
+    width: 300px;
+    height: 100%;
+    background-color: #e0e5ec;
+    font-size: 14px;
+    padding-top: 50px;
+    transition: all 0.3s ease;
+    z-index: 2;
+    /* Ensure sidebar appears above dashboard */
+    overflow-y: auto;
+    /* Add scrollbar */
+    scrollbar-width: thin;
+    /* Thin scrollbar */
+    scrollbar-color: #ccc transparent;
+    /* Scrollbar color */
+}
+
+/* Styles for the sidebar content */
+.active-sidebar-content {
+    padding: 20px;
+    color: #333;
+}
+
+.active-sidebar-content h2 {
+    text-align: center;
+}
+
+/* Show class for all sidebars */
+.active-sidebar.show {
+    right: 0;
+    /* Visible when toggled */
+}
+
+/* Styles for the active module list */
+#activeModule {
+    list-style-type: decimal;
+    /* Display numbers */
+    padding-left: 20px;
+    /* Add left padding for better alignment */
+}
+
+/* Add space between active module list items */
+.active-sidebar-content li {
+    margin-bottom: 5px;
+    /* Adjust as needed */
+}
+
+/* Shared styles for complete module sidebar */
+.Completed-Module-sidebar {
+    position: fixed;
+    top: 0;
+    right: -300px;
+    /* Initially hidden */
+    width: 300px;
+    height: 100%;
+    background-color: #e0e5ec;
+    font-size: 14px;
+    padding-top: 50px;
+    transition: all 0.3s ease;
+    z-index: 2;
+    /* Ensure sidebar appears above dashboard */
+    overflow-y: auto;
+    /* Add scrollbar */
+    scrollbar-width: thin;
+    /* Thin scrollbar */
+    scrollbar-color: #ccc transparent;
+    /* Scrollbar color */
+}
+
+/* Styles for the sidebar content */
+.Completed-Module-sidebar-content {
+    padding: 20px;
+    color: #333;
+}
+
+.Completed-Module-sidebar-content h2 {
+    text-align: center;
+}
+
+/* Show class for complete module sidebar */
+.Completed-Module-sidebar.show {
+    right: 0;
+    /* Visible when toggled */
+}
+
+/* Styles for the complete module list */
+#Completed-Module-sidebar {
+    list-style-type: decimal;
+    /* Display numbers */
+}
+
+/* Add space between complete module list items */
+.Completed-Module-sidebar-content li {
+    margin-bottom: 5px;
+    /* Adjust as needed */
+}
+
+
+/* course , batch , program*/
+.course-box,
+#BatchBox,
+#ProgramBox {
+    display: none;
+    position: fixed;
+    z-index: 2;
+    left: 50%;
+    top: 55%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(255, 255, 255, 0.95);
+    padding: 40px;
+    border: 1px solid #ddd;
+    border-radius: 15px;
+    width: 450px;
+    max-width: 90%;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2), 0 0 50px rgba(0, 0, 0, 0.1);
+    animation: fadeInUp 0.5s ease-in-out;
+}
+
+@keyframes fadeInUp {
+    0% {
+        transform: translate(-50%, -50%) scale(0.5);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+    }
+}
+
+.course-box .close-box,
+#BatchBox .close-box,
+#ProgramBox .close-box {
+    color: #aaa;
+    position: absolute;
+    top: 4px;
+    right: 10px;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.3s ease-in-out;
+}
+
+.course-box .close-box:hover,
+#BatchBox .close-box:hover,
+#ProgramBox .close-box:hover,
+.course-box .close-box:focus,
+#BatchBox .close-box:focus,
+#ProgramBox .close-box:focus {
+    color: #333;
+    /* Darker color on hover/focus */
+}
+
+.course-box form,
+#BatchBox form,
+#ProgramBox form {
+    display: flex;
+    flex-direction: column;
+}
+
+.course-box label,
+#BatchBox label,
+#ProgramBox label {
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #333;
+    /* Darker text color */
+    animation: fadeInText 0.5s ease-in-out;
+    animation-fill-mode: forwards;
+}
+
+@keyframes fadeInText {
+    0% {
+        color: transparent;
+        opacity: 0;
+    }
+
+    100% {
+        color: #333;
+        /* Darker text color */
+        opacity: 1;
+    }
+}
+
+.course-box input,
+#BatchBox input,
+#ProgramBox input {
+    padding: 12px;
+    /* Slightly reduced padding */
+    margin-bottom: 16px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    /* Slightly increased border radius */
+    transition: box-shadow 0.3s ease-in-out;
+    outline: none;
+}
+
+.course-box input:focus,
+#BatchBox input:focus,
+#ProgramBox input:focus {
+    border-color: #ff8c00;
+    box-shadow: 0 0 8px rgba(255, 140, 0, 0.5);
+}
+
+.course-box button,
+#BatchBox button,
+#ProgramBox button {
+    padding: 13px 20px;
+    /* Adjusted padding */
+    margin-bottom: 10px;
+    background-color: #ff8c00;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.course-box button:hover,
+#BatchBox button:hover,
+#ProgramBox button:hover {
+    background-color: #ff7b00;
+    /* Slightly darker shade on hover */
+    transform: scale(1.05);
+    /* Slightly smaller scaling */
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+    /* Smaller shadow */
+}
+
+/* mentor box*/
+#mentorBox {
+    display: none;
+    position: fixed;
+    z-index: 3;
+    left: 50%;
+    top: 55%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(255, 255, 255, 0.95);
+    padding: 35px;
+    border: 1px solid #ddd;
+    border-radius: 15px;
+    width: 450px;
+    max-width: 90%;
+    /* Adjusted max-height based on content */
+    max-height: 530px;
+    /* Removed overflow-y */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2), 0 0 50px rgba(0, 0, 0, 0.1);
+    animation: fadeInUp 0.5s ease-in-out;
+    /* Removed scrollbar properties */
+}
+
+@keyframes fadeInUp {
+    0% {
+        transform: translate(-50%, -50%) scale(0.5);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+    }
+}
+
+#mentorBox form {
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+    margin-bottom: 10px;
+    animation: fadeInForm 1s ease-in-out;
+}
+
+@keyframes fadeInForm {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+#mentorBox label {
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #333;
+    animation: fadeInLabel 0.5s ease-in-out;
+}
+
+@keyframes fadeInLabel {
+    0% {
+        color: transparent;
+        opacity: 0;
+    }
+
+    100% {
+        color: #333;
+        opacity: 1;
+    }
+}
+
+#mentorBox input {
+    width: 95%;
+    /* Set width to 100% */
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    outline: none;
+}
+
+#mentorBox input:focus {
+    border-color: #ff8c00;
+    box-shadow: 0 0 8px rgba(255, 140, 0, 0.5);
+}
+
+#mentorBox button {
+    padding: 13px 20px;
+    margin-bottom: 10px;
+    background-color: #ff8c00;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+#mentorBox button:hover {
+    background-color: #ff8c00;
+    /* Change the color to orange */
+    transform: scale(1.05);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+}
+
+#mentorBox .close-box {
+    color: #aaa;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.3s ease-in-out;
+    position: absolute;
+    top: 5px;
+    right: 10px;
+}
+
+#mentorBox .close-box:hover,
+#mentorBox .close-box:focus {
+    color: black;
+    text-decoration: none;
+}
+
+/* Styles for the modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 2;
+    left: 50%;
+    top: 45%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(255, 255, 255, 0.95);
+    padding: 40px;
+    border: 1px solid #ddd;
+    border-radius: 15px;
+    width: 650px;
+    max-width: 90%;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2), 0 0 50px rgba(0, 0, 0, 0.1);
+    animation: fadeInUp 0.5s ease-in-out;
+    overflow-y: auto;
+    /* Add scrollbar if content exceeds modal height */
+}
+
+.modal-content {
+    display: flex;
+    flex-direction: column;
+    /* Additional styles for modal content */
+}
+
+
+.close {
+    color: #aaa;
+    position: absolute;
+    top: 4px;
+    right: 10px;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.3s ease-in-out;
+}
+
+.close:hover {
+    color: #333;
+    /* Darker color on hover */
+    text-decoration: none;
+    cursor: pointer;
+}
+
+h2 {
+    margin-top: 0;
+    /* Remove default margin */
+    margin-bottom: 20px;
+    /* Add space below heading */
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+}
+
+#fileInput {
+    margin-bottom: 10px;
+    /* Add bottom margin */
+    border: 1px solid #ccc;
+    /* Add border to file input */
+    border-radius: 5px;
+    /* Add border radius */
+    padding: 8px;
+    /* Add padding */
+    width: calc(100% - 15px);
+    /* Reduce width to fit within the container */
+}
+
+.upload-button {
+    font-family: 'Poppins';
+    font-size: 15px;
+    min-width: auto;
+    margin-bottom: 10px;
+    background-color: #ff8c00;
+    color: #fff;
+    border: 1px solid #ff8c00;
+    border-radius: 10px;
+    /* Adjusted border-radius for oval shape */
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s ease-in-out, box-shadow 0.3s ease-in-out;
+    margin-right: 326px;
+    /* Added flex property */
+    flex: 1;
+}
+
+.upload-button:hover {
+    background-color: #ff7b00;
+    transform: scale(1.05);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Styles for the report box */
+#report-box {
+    display: none;
+    position: fixed;
+    z-index: 2;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(255, 255, 255, 0.95);
+    padding: 40px;
+    border: 1px solid #ddd;
+    border-radius: 15px;
+    width: 550px;
+    max-width: 90%;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2), 0 0 50px rgba(0, 0, 0, 0.1);
+    animation: fadeInUp 0.5s ease-in-out;
+}
+
+/* Styles for the report content */
+.report-content {
+    /* Additional styles for report content */
+    display: flex;
+    flex-direction: column;
+}
+
+.close {
+    color: #aaa;
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover {
+    color: #333;
+}
+
+
+h2 {
+    margin-top: 0;
+    /* Remove default margin */
+    margin-bottom: 20px;
+    /* Add space below heading */
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Apply Flatpickr styles to the date inputs */
+#report-box input[type="text"] {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Additional styles for the "Download Schedule" button */
+#report-box button {
+    font-family: 'Poppins';
+    font-size: 15px;
+    min-width: auto;
+    margin-top: 20px;
+    margin-right: 362px;
+    padding: 5px;
+    background-color: #ff8c00;
+    color: #fff;
+    border: 1px solid #ff8c00;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+#report-box button:hover {
+    background-color: #ff7b00;
+    transform: scale(1.05);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+
+/*schedule box*/
+#scheduleBox {
+    display: none;
+    position: fixed;
+    top: 55%;
+    /* Changed from 55% */
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 25px;
+    /* Increased padding */
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    border-radius: 15px;
+    /* Increased border-radius */
+    text-align: center;
+    font-family: 'Poppins';
+    animation: fadeInUp 0.5s ease-in-out, fadeIn 0.5s ease-in-out;
+    /* Added fadeIn animation */
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+#scheduleBox h2 {
+    margin-bottom: 20px;
+    color: black;
+}
+
+#scheduleForm {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#scheduleForm label {
+    font-weight: bold;
+    color: black;
+    text-align: left;
+}
+
+#scheduleForm select {
+    padding: 10px;
+    box-sizing: border-box;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    width: 100%;
+}
+
+#scheduleForm input {
+    padding: 10px;
+    box-sizing: border-box;
+    flex-grow: 1;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+#buttonContainer {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+    justify-content: flex-end;
+}
+
+.scheduleButton,
+.viewScheduleButton {
+    padding: 10px;
+    cursor: pointer;
+    font-family: 'Poppins';
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s, transform 0.2s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.scheduleButton {
+    background-color: #ff8c00;
+    color: white;
+}
+
+.viewScheduleButton {
+    background-color: #ff8c00;
+    color: white;
+}
+
+.scheduleButton:hover,
+.viewScheduleButton:hover {
+    transform: scale(1.1);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+#scheduleForm select:hover {
+    border-color: #ff8c00;
+}
+
+#scheduleForm select:focus {
+    outline: none;
+    border-color: #ff8c00;
+    box-shadow: 0 0 5px rgba(241, 157, 0, 0.808);
+}
+
+#closeBtn {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    cursor: pointer;
+    font-size: 18px;
+    color: #555;
+    transition: color 0.3s ease-in-out;
+}
+
+#closeBtn:hover {
+    color: black;
+}
+
+/* Search Container */
+#searchContainer {
+    margin-bottom: 10px;
+}
+
+#searchInput {
+    padding: 8px;
+    margin-right: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+#searchContainer button {
+    padding: 8px 12px;
+    border: 1px solid #ff8c00;
+    /* Orange border color */
+    border-radius: 4px;
+    background-color: #ff8c00;
+    ;
+    /* Orange background color */
+    color: #fff;
+    /* White text color */
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out, border-color 0.3s ease-in-out;
+}
+
+#searchContainer button:hover {
+    background-color: #ff8c00;
+    /* Darker orange on hover */
+    border-color: #ff8c00;
+}
+
+
+.color-box {
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    border: 1px solid #ccc;
+    vertical-align: middle;
+    margin-right: 5px;
+}
+
+.red {
+    background-color: red;
+}
+
+.orange {
+    background-color: orange;
+}
+
+.gray {
+    background-color: gray;
+}
+
+.green {
+    background-color: green;
+}
+
+/*reschedule box*/
+#rescheduleBox {
+    display: none;
+    position: fixed;
+    top: 55%;
+    /* Changed from 55% */
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 55px;
+    /* Increased padding */
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 35%;
+    z-index: 1000;
+    border-radius: 15px;
+    /* Increased border-radius */
+    animation: fadeInUp 0.5s ease-in-out, fadeIn 0.5s ease-in-out;
+    /* Added fadeIn animation */
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+#rescheduleBox h2 {
+    margin-bottom: 20px;
+    color: black;
+    text-align: center;
+}
+
+#rescheduleForm {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#rescheduleForm label {
+    font-weight: bold;
+    color: black;
+    text-align: left;
+}
+
+#rescheduleForm select {
+    padding: 10px;
+    box-sizing: border-box;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    width: 100%;
+}
+
+#rescheduleForm input {
+    padding: 10px;
+    box-sizing: border-box;
+    flex-grow: 1;
+    border: 1px solid #ddd;
+}
+
+#rescheduleForm select:hover {
+    border-color: #ff8c00;
+}
+
+#rescheduleForm select:focus {
+    outline: none;
+    border-color: #ff8c00;
+    box-shadow: 0 0 5px rgba(241, 157, 0, 0.808);
+}
+
+.row-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    /* Three equal-width columns */
+    grid-gap: 10px;
+    /* Add some space between each column */
+}
+
+.checkbox-label-container {
+    align-items: center;
+    padding: 5px;
+}
+
+.checkbox-label-container input[type="checkbox"] {
+    margin-right: 5px;
+    /* Add some space between checkbox and label */
+}
+
+label {
+    margin: 0;
+    /* Reset margin */
+}
+
+
+#buttonContainers {
+    gap: 10px;
+    margin-top: 20px;
+    right: 30px;
+    bottom: 5px;
+    justify-content: flex-end;
+    position: absolute;
+
+}
+
+#closeBtn {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    cursor: pointer;
+    font-size: 18px;
+    color: #555;
+    font-family:'Poppins';
+    transition: color 0.3s ease-in-out;
+    /* Specify font family for close button */
+}
+
+#closeBtn:hover {
+    color: black;
+}
+
+/* Calendar */
+#calendarContainer {
+    display: none;
+    position: fixed;
+    top: 52%;
+    left: 53%;
+    width: 1200px;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    background-color: #ffffff;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    z-index: 1;
+    border-radius: 12px;
+    animation: fadeIn 0.5s ease-in-out;
+    cursor: pointer;
+    max-height: 530px;
+}
+
+/* Overlay */
+#overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 0;
+}
+
+/* Schedule Container */
+#scheduleContainer {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    max-height: 480px;
+    /* Adjust height as needed */
+    overflow-y: auto;
+    overflow-x: auto;
+    /* Hide horizontal scrollbar */
+    padding: 0px;
+    background-color: #ffffff;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    margin-top: 10px;
+    /* Adjust spacing from calendarContainer */
+
+    /* Style the vertical scrollbar */
+    scrollbar-width: thin;
+    /* For Firefox */
+}
+
+/* Style the horizontal scrollbar in WebKit-based browsers */
+#scheduleContainer::-webkit-scrollbar {
+    width: 8px;
+    /* Width of the scrollbar */
+}
+
+/* Style the track of the horizontal scrollbar */
+#scheduleContainer::-webkit-scrollbar-track {
+    background: grey;
+    /* Transparent background */
+}
+
+/* Style the thumb/grip of the horizontal scrollbar */
+#scheduleContainer::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.2);
+    /* Color of the scrollbar thumb */
+    border-radius: 4px;
+    /* Rounded corners */
+}
+
+
+#scheduleContainer table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#scheduleContainer th {
+    height: 50px;
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #e0e0e0;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+#scheduleContainer td {
+    height: 40px;
+    /* Reduced height */
+    padding: 8px;
+    /* Reduced padding */
+    text-align: center;
+    border: 1px solid #e0e0e0;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    font-size: 13px;
+    /* Reduced font size */
+    vertical-align: super;
+    /* Align text vertically in the middle */
+    line-height: 1.5;
+    /* Adjust line height if needed */
+}
+
+#scheduleContainer th {
+    background-color: #f7f7f7;
+    color: #333;
+    font-weight: normal;
+}
+
+#scheduleContainer td:hover {
+    background-color: #f2f2f2;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+/* Fixed first column */
+#scheduleTable td:first-child {
+    position: -webkit-sticky;
+    position: sticky;
+    left: 0;
+    background-color: #f7f7f7;
+    z-index: 2;
+}
+
+#scheduleContainer .noResultsMessage {
+    display: none;
+    text-align: center;
+    /* Center align the message */
+    margin-top: 20px;
+    /* Add some space between the table and the message */
+}
+
+#scheduleContainer::-webkit-scrollbar {
+    width: 5px;
+}
+
+#scheduleContainer::-webkit-scrollbar-thumb {
+    background-color: #6b6b6b;
+    border-radius: 4px;
+}
+
+#scheduleContainer::-webkit-scrollbar-track {
+    background-color: #f0f0f0;
+    border-radius: 4px;
+}
+
+/* Close Button */
+#closeButton {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    cursor: pointer;
+    font-family: 'Poppins';
+    font-size: 18px;
+    color: #888;
+    transition: color 0.3s ease-in-out;
+}
+
+#closeButton:hover {
+    color: #666;
+}
+
+/* Add some styles for the draggable element */
+.draggable {
+    cursor: grab;
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    /* Include box-shadow for additional 3D effect */
+}
+
+/* Add a different style when grabbing */
+.draggable:active {
+    transform: scale(1.1) rotate(3deg);
+    /* Increase size and add rotation on grabbing */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    /* Add shadow for depth */
+}
+
+/* Add a different style when dragging */
+.dragging {
+    background-color: transparent;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+/* Schedule Popup Styling */
+#schedulePopup {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    padding: 20px;
+    /* Increased padding */
+    width: 550px;
+    /* Increased width */
+    position: fixed;
+    top: 55%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    /* Slightly increased border radius */
+    overflow-y: auto;
+    max-height: 80vh;
+    animation: fadeIn 0.5s ease forwards;
+}
+
+#schedulePopup h2 {
+    text-align: center;
+}
+
+.scheduleItem {
+    margin-bottom: 15px;
+    /* Increased margin */
+    padding: 15px;
+    /* Increased padding */
+    background-color: #fff;
+    border-radius: 8px;
+    /* Slightly increased border radius */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.scheduleItem select {
+    width: calc(100% - 20px);
+    /* Adjusted width */
+    padding: 12px;
+    /* Adjusted padding */
+    margin-top: 12px;
+    /* Adjusted margin */
+    margin-bottom: 18px;
+    /* Adjusted margin */
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    /* Slightly increased border radius */
+    font-size: 15px;
+}
+
+.scheduleItem select:hover {
+    border-color: darkorange;
+}
+
+.scheduleItem select:focus {
+    outline: none;
+    border-color: orange;
+    box-shadow: 0 0 0 2px rgba(255, 165, 0, 0.5);
+}
+
+.scheduleButton,
+.viewScheduleButton {
+    font-family: 'Poppins';
+}
+
+#closeButtonContainer {
+    cursor: pointer;
+    position: absolute;
+    font-family: 'Poppins';
+    top: 5px;
+    /* Adjusted top position */
+    right: 10px;
+    /* Adjusted right position */
+    font-size: 18px;
+    color: #555;
+    transition: color 0.3s ease;
+}
+
+#closeButtonContainer:hover {
+    color: #333;
+}
+
+/* Customize scrollbar styles */
+#schedulePopup::-webkit-scrollbar {
+    width: 5px;
+    /* Adjusted width */
+}
+
+#schedulePopup::-webkit-scrollbar-thumb {
+    background-color: lightgray;
+    border-radius: 4px;
+}
+
+#schedulePopup::-webkit-scrollbar-track {
+    background-color: #f0f0f0;
+    border-radius: 4px;
+}
+
+
+/*logout*/
+#logout-btn {
+    padding: 10px 20px;
+    background-color: #06488a;
+    /* Deep blue */
+    color: #fff;
+    border: none;
+    font-family: 'Poppins';
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s ease-in-out, box-shadow 0.5s ease-in-out;
+    margin-right: 20px;
+    animation: fadeIn 1s ease-in-out;
+    /* Add animation */
+}
+
+#logout-btn:hover {
+    background-color: #0f5ca8;
+    /* Darker shade for hover effect */
+    transform: scale(1.1);
+    box-shadow: 0 0 20px rgba(24, 27, 182, 0.8), 0 0 40px rgba(31, 44, 231, 0.6);
+    /* Red shadow for shining effect */
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+/*Username*/
+#username {
+    display: flex;
+    align-items: center;
+    font-size: 18px;
+    color: #ecf0f1;
+    margin-right: 20px;
+    padding: 10px;
+    cursor: pointer;
+    animation: fadeInUsername 1s ease-in-out forwards;
+}
+
+#username:hover+.dropdown .dropdown-content:before {
+    top: -15px;
+    content: "";
+    position: absolute;
+    right: 10px;
+    border-width: 0 8px 8px 8px;
+    border-style: solid;
+    border-color: #ff8c00;
+}
+
+@keyframes fadeInUsername {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+.user-icon {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: #ccc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 10px;
+}
+
+.user-icon i {
+    color: white;
+}
+
+@keyframes fadeInUsername {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+/* Style for the overlay */
+.overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+}
+
+
+/* Style for the profile popup */
+.profile-box {
+    display: none;
+    position: fixed;
+    top: 55%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 2;
+    background-color: rgba(255, 255, 255, 0.95);
+    background-image: linear-gradient(135deg, rgba(255, 255, 255, 0.96) 0%, rgba(255, 255, 255, 0.92) 100%);
+    width: 300px;
+    animation: fadeInUp 0.5s ease-in-out;
+}
+
+/* Keyframes for fade-in animation */
+@keyframes fadeInUp {
+    0% {
+        transform: translate(-50%, -50%) scale(0.5);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+    }
+}
+
+/* Close button styles */
+.profile-box .closeProfilePopup {
+    color: #aaa;
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.3s ease-in-out;
+}
+
+.profile-box .closeProfilePopup:hover,
+.profile-box .closeProfilePopup:focus {
+    color: black;
+    text-decoration: none;
+}
+
+/* Form styles */
+.profile-box form {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+}
+
+.profile-box label {
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: black;
+    animation: fadeInText 0.5s ease-in-out;
+    animation-fill-mode: forwards;
+}
+
+/* Input styles */
+.profile-box input {
+    padding: 10px;
+    margin-bottom: 16px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    transition: box-shadow 0.3s ease-in-out;
+    outline: none;
+}
+
+.profile-box input:focus {
+    border-color: #ff8c00;
+    box-shadow: 0 0 8px rgba(245, 189, 6, 0.5);
+}
+
+/* Button styles */
+.profile-box button {
+    padding: 12px;
+    margin-bottom: 8px;
+    background-color: #ff8c00;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.profile-box button:hover {
+    background-color: #ff8c00;
+    transform: scale(1.1);
+    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Style for the overlay */
+.overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+}
+
+/* Style for the change password popup */
+.change-password-box {
+    display: none;
+    position: fixed;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 2;
+    background-color: rgba(255, 255, 255, 0.95);
+    background-image: linear-gradient(135deg, rgba(255, 255, 255, 0.96) 0%, rgba(255, 255, 255, 0.92) 100%);
+    width: 300px;
+    animation: fadeInUp 0.5s ease-in-out;
+}
+
+/* Close button styles for change password box */
+.change-password-box .closeChangePasswordPopup {
+    color: #aaa;
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.3s ease-in-out;
+}
+
+.change-password-box .closeChangePasswordPopup:hover,
+.change-password-box .closeChangePasswordPopup:focus {
+    color: black;
+    text-decoration: none;
+}
+
+/* Form styles for change password box */
+.change-password-box form {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+}
+
+.change-password-box label {
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: black;
+    animation: fadeInText 0.5s ease-in-out;
+    animation-fill-mode: forwards;
+}
+
+/* Input styles for change password box */
+.change-password-box input {
+    padding: 10px;
+    margin-bottom: 16px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    transition: box-shadow 0.3s ease-in-out;
+    outline: none;
+}
+
+.change-password-box input:focus {
+    border-color: #ff8c00;
+    box-shadow: 0 0 8px rgba(247, 154, 16, 0.5);
+}
+
+/* Button styles for change password box */
+.change-password-box button {
+    padding: 12px;
+    margin-bottom: 8px;
+    background-color: #ff8c00;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.change-password-box button:hover {
+    background-color: #ff8c00;
+    transform: scale(1.1);
+    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.3);
+}
+
+.password-input-container {
+    position: relative;
+}
+
+.toggle-password {
+    position: absolute;
+    right: 100px;
+    /* Adjust the right distance as needed */
+    top: 35%;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+
+.password-input-container input {
+    padding-right: 30px;
+    /* Adjust the right padding to make space for the eye icon */
+}
+
+/*loader inside the calender*/
+@keyframes spin-wheel {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+#loadingLogo {
+    position: absolute;
+    /* Position the loading logo absolutely */
+    top: 5px;
+    /* Adjust as needed */
+    left: 4px;
+    /* Adjust as needed */
+    width: 20px;
+    height: 20px;
+    /* Adjust the size of the loadingLogo image */
+    animation: spin-wheel 2s linear infinite;
+    /* Adjust duration and timing function as needed */
+}
+
+#loadingLogo img {
+    width: 100%;
+}
+
+body.loading #loadingLogo-overlay {
+    display: none;
+}
+
+@keyframes spin {
+    from {
+        transform: rotateY(0deg);
+    }
+
+    to {
+        transform: rotateY(360deg);
+    }
+}
+
+/* Style for the loading indicator */
+#popupLoading {
+    position: absolute;
+    /* Position the loading indicator absolutely within the calendar */
+    top: 50%;
+    /* Position it vertically in the middle of the calendar */
+    left: 50%;
+    /* Position it horizontally in the middle of the calendar */
+    transform: translate(-50%, -50%);
+    /* Center the loading indicator */
+    z-index: 9999;
+    /* Ensure it appears above other content */
+}
+
+/* Style for the loading logo */
+.loadingpop img {
+    width: 100px;
+    /* Set the width of the loading logo to medium */
+    height: auto;
+    /* Maintain aspect ratio */
+    animation: spin 1s linear infinite;
+}
+
+#userListContainer {
+    width: 100%;
+    /* Adjust width as needed */
+    max-height: 450px;
+    /* Set a maximum height */
+    overflow-y: auto;
+    /* Enable vertical scrollbar */
+    font-family: 'Poppins';
+}
+
+#userListContainer .userManagementContent {
+    padding-right: 10px;
+    /* Add padding to accommodate scrollbar width */
+}
+
+#userListContainer .userManagementContent table {
+    width: calc(100% - 16px);
+    /* Adjust table width to account for scrollbar width */
+    border-collapse: collapse;
+}
+
+#userListContainer .userManagementContent th,
+#userListContainer .userManagementContent td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+#userListContainer .userManagementContent th {
+    background-color: #f2f2f2;
+    color: #333;
+}
+
+/* Style for scrollbar */
+#userListContainer::-webkit-scrollbar {
+    width: 8px;
+    /* Set the width of the scrollbar */
+}
+
+#userListContainer::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    /* Color of the scrollbar track */
+}
+
+#userListContainer::-webkit-scrollbar-thumb {
+    background: #888;
+    /* Color of the scrollbar thumb */
+    border-radius: 4px;
+    /* Roundness of the scrollbar thumb */
+}
+
+#userListContainer::-webkit-scrollbar-thumb:hover {
+    background: #555;
+    /* Color of the scrollbar thumb on hover */
+}
+
+/* CSS for select dropdown options */
+#userManagement .role-dropdown {
+    width: 100%;
+    padding: 6px 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 14px;
+}
+
+#userManagement .role-dropdown option {
+    font-size: 14px;
+}
+
+
+/* Style for edit and delete buttons */
+#userManagement .edit-btn {
+    background-color: #4caf50;
+    border: none;
+    color: white;
+    padding: 8px 12px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    margin-right: 5px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+#userManagement .delete-btn {
+    background-color: #f44336;
+    /* Red color for delete button */
+    border: none;
+    color: white;
+    padding: 8px 12px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    margin-right: 5px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+#userManagement .edit-btn:hover {
+    background-color: #45a049;
+}
+
+#userManagement .delete-btn:hover {
+    background-color: #f44336;
+}
+
+/* Style for user management box */
+#userManagement {
+    display: none;
+    position: fixed;
+    top: 52%;
+    left: 53%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 2;
+    background-color: rgba(255, 255, 255, 0.95);
+    background-image: linear-gradient(135deg, rgba(255, 255, 255, 0.96) 0%, rgba(255, 255, 255, 0.92) 100%);
+    width: 1150px;
+    height: 500px;
+    /* Set a maximum height */
+    animation: fadeInUp 0.5s ease-in-out;
+}
+
+
+/* Style for user management header */
+#userManagement .userManagementHeader {
+    display: flex;
+    justify-content: center;
+    /* Center horizontally */
+    align-items: center;
+}
+
+#userManagement .userManagementHeader h3 {
+    color: #333;
+    font-size: 20px;
+    margin: 0;
+    /* Remove default margin */
+}
+
+
+/* Style for close button */
+#userManagement .userManagementHeader .closeBtns {
+    cursor: pointer;
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    font-size: 20px;
+    color: #333;
+    font-family: 'Poppins';
+}
+
+#userManagement .userManagementHeader .closeBtns:hover {
+    color: #666;
+}
+
+/* Style for user management content */
+#userManagement .userManagementContent {
+    margin-top: 20px;
+}
+
+.SearchContainers {
+    margin-left: 15px;
+    margin-bottom: 5px;
+}
+
+#searchInputs {
+    width: 200px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+#searchInputs:hover {
+    border-color: orange;
+}
+
+.toast-container {
+    position: fixed;
+    top: 70px;
+    right: 5px;
+    width: auto;
+    z-index: 10000;
+    /* Ensure the toast is above other content */
+}
+
+.toast {
+    animation: slideInRight 0.5s ease;
+    /* Animation for sliding from right to left */
+}
+
+@keyframes slideInRight {
+    0% {
+        transform: translateX(100%);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}
+.popupss {
+  position: absolute;
+  background-color: white;
+  border: 1px solid #ccc;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+  font-size: 14px;
+  max-width: 200px; /* Set a maximum width to prevent the popup from becoming too wide */
+}
+
+.popupss.show {
+  opacity: 1;
+}
+
+.invisible {
+    display: none;
+}
+
+/* Default styles */
+
+/* Add your default styles here */
+
+/* Media queries for 720px */
+@media (max-width: 720px) {
+    /* Add styles specific to 720px screen width */
+    /* For example: */
+    .dashboard-container {
+        width: 80%; /* Adjust width for smaller screens */
+        left: 5%; /* Adjust positioning */
+    }
+
+    .sidebar,
+    .active-sidebar,
+    .Completed-Module-sidebar,
+    .course-box,
+    #BatchBox,
+    #ProgramBox {
+        width: 250px; /* Adjust width for smaller screens */
+        right: -250px; /* Adjust positioning */
+    }
+
+    #mentorBox {
+        width: 90%; /* Adjust width for smaller screens */
+        left: 5%; /* Adjust positioning */
+        transform: translate(-50%, -50%); /* Adjust positioning */
+    }
+
+    .modal {
+        width: 90%;
+        padding: 20px;
+    }
+
+    #scheduleBox,
+    #rescheduleBox {
+        width: 90%;
+        padding: 20px;
+    }
+
+    #calendarContainer {
+        width: 90%;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .profile-box,
+    .change-password-box {
+        width: 90%;
+    }
+
+    #userManagement {
+        width: 90%;
+        height: auto;
+        max-height: none;
+    }
+
+    .SearchContainers {
+        margin-left: 0;
+        margin-bottom: 10px;
+    }
+
+    #searchInputs {
+        width: 100%;
+    }
+}
+
+/* Media queries for 1024px */
+@media (max-width: 1024px) {
+    /* Add styles specific to 1024px screen width */
+    /* For example: */
+    .dashboard-container {
+        width: 70%; /* Adjust width for smaller screens */
+        left: 3%; /* Adjust positioning */
+    }
+
+    .sidebar,
+    .active-sidebar,
+    .Completed-Module-sidebar,
+    .course-box,
+    #BatchBox,
+    #ProgramBox {
+        width: 200px; /* Adjust width for smaller screens */
+        right: -200px; /* Adjust positioning */
+    }
+
+    #mentorBox {
+        width: 70%; /* Adjust width for smaller screens */
+        left: 5%; /* Adjust positioning */
+        transform: translate(-50%, -50%); /* Adjust positioning */
+    }
+
+    .modal {
+        width: 80%;
+    }
+
+    #scheduleBox,
+    #rescheduleBox {
+        width: 80%;
+    }
+
+    #calendarContainer {
+        width: 80%;
+    }
+
+    .profile-box,
+    .change-password-box {
+        width: 80%;
+    }
+}
+
+/* Media queries for 480px */
+@media (max-width: 480px) {
+    /* Add styles specific to 480px screen width */
+    /* For example: */
+    .dashboard-container {
+        width: 90%; /* Adjust width for smaller screens */
+        left: 2%; /* Adjust positioning */
+    }
+
+    .sidebar,
+    .active-sidebar,
+    .Completed-Module-sidebar,
+    .course-box,
+    #BatchBox,
+    #ProgramBox {
+        width: 90%; /* Adjust width for smaller screens */
+        right: 5%; /* Adjust positioning */
+        left: unset; /* Remove left positioning */
+        transform: translate(0, -50%); /* Adjust positioning */
+    }
+
+    #mentorBox {
+        width: 90%; /* Adjust width for smaller screens */
+        left: 5%; /* Adjust positioning */
+        transform: translate(-50%, -50%); /* Adjust positioning */
+    }
+
+    .modal {
+        width: 100%;
+        padding: 10px;
+    }
+
+    #scheduleBox,
+    #rescheduleBox {
+        width: 100%;
+        padding: 15px;
+    }
+
+    #calendarContainer {
+        width: 100%;
+    }
+
+    .profile-box,
+    .change-password-box {
+        width: 100%;
+        padding: 15px;
+    }
+
+    #userManagement {
+        width: 100%;
+        padding: 10px;
+    }
+
+    #userManagement .userManagementHeader .closeBtns {
+        font-size: 18px;
+    }
+
+    .SearchContainers {
+        margin-bottom: 15px;
+    }
+
+    #searchInputs {
+        width: 100%;
+    }
+}
+
+/* Media queries for 320px */
+@media (max-width: 320px) {
+    /* Add styles specific to 320px screen width */
+    /* For example: */
+    .dashboard-container {
+        width: 95%; /* Adjust width for smaller screens */
+        left: 2.5%; /* Adjust positioning */
+    }
+
+    .sidebar,
+    .active-sidebar,
+    .Completed-Module-sidebar,
+    .course-box,
+    #BatchBox,
+    #ProgramBox {
+        width: 90%; /* Adjust width for smaller screens */
+        right: 5%; /* Adjust positioning */
+        left: unset; /* Remove left positioning */
+        transform: translate(0, -50%); /* Adjust positioning */
+    }
+
+    #mentorBox {
+        width: 95%; /* Adjust width for smaller screens */
+        left: 2.5%; /* Adjust positioning */
+        transform: translate(-50%, -50%); /* Adjust positioning */
+    }
+
+    .modal {
+        width: 100%;
+        padding: 10px;
+    }
+
+    #scheduleBox,
+    #rescheduleBox {
+        width: 100%;
+        padding: 15px;
+    }
+
+    #calendarContainer {
+        width: 100%;
+    }
+
+    .profile-box,
+    .change-password-box {
+        width: 100%;
+        padding: 15px;
+    }
+
+    #userManagement {
+        width: 100%;
+        padding: 10px;
+    }
+
+    #userManagement .userManagementHeader .closeBtns {
+        font-size: 18px;
+    }
+
+    .SearchContainers {
+        margin-bottom: 15px;
+    }
+
+    #searchInputs {
+        width: 100%;
+    }
+}
+
+
